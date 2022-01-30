@@ -1,0 +1,195 @@
+:root {
+    --colorMain: black;
+    --colorSecondary: floralwhite;
+    --colorBgMain: lightgrey;
+    --colorBgCorrect: mediumseagreen;
+    --colorBgExisting: #CCCC66;
+    --colorBgNonexisting: grey;
+
+    --fontMain: 'Arial Narrow', Arial, sans-serif;
+
+    --borderBox: 0.1rem;
+    --marginBox: 0.2rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--fontMain);
+    font-size: 100%;
+}
+
+body {
+    margin-bottom: 2rem;    /* Accounts for the fixed footer */
+}
+
+header {
+    font-size: 2rem;
+    text-align: center;    
+    padding: var(--marginBox);
+}
+section.separator {
+    width: 100%;
+    height: 1rem;
+    background-color: var(--colorBgNonexisting);
+    margin-bottom: 1rem;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: var(--marginBox);
+    text-align: center;
+    color: var(--colorSecondary);
+    background-color: var(--colorBgNonexisting);
+}
+
+/*
+    Word table
+*/
+:root {
+    --dimensionBox: 45px;
+    --marginTableLateral: calc((100vw - (5 * (var(--dimensionBox) + var(--marginBox) + (var(--borderBox) * 2)) + var(--marginBox))) / 2);
+}
+section#table {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 0 var(--marginTableLateral) 2rem var(--marginTableLateral);
+}
+.word {
+    display: flex;
+    flex-flow: row nowrap;
+}
+.letter {
+    width: var(--dimensionBox);
+    height: var(--dimensionBox);
+    line-height: var(--dimensionBox);   /* Vertical alignment: center */
+    border: var(--borderBox) solid var(--colorBgMain);
+    margin: var(--marginBox);
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    cursor: default;
+}
+@media (min-width: 350px) {
+    :root {
+        --dimensionBox: 60px;
+        --marginTableLateral: calc((100vw - (5 * (var(--dimensionBox) + var(--marginBox) + (var(--borderBox) * 2)) + var(--marginBox))) / 2);
+    }
+    .letter {
+        width: var(--dimensionBox);
+        height: var(--dimensionBox);    
+    }
+}
+
+/*
+    Letter and key states
+*/
+.nonexisting {
+    color: var(--colorSecondary);
+    background-color: var(--colorBgNonexisting) !important;
+    border-color: var(--colorBgNonexisting);
+}
+.existing {
+    color: var(--colorSecondary);
+    background-color: var(--colorBgExisting) !important;
+    border-color: var(--colorBgExisting);
+}
+.correct {
+    color: var(--colorSecondary);
+    background-color: var(--colorBgCorrect) !important;
+    border-color: var(--colorBgCorrect);
+}
+.invalid {
+    color: var(--colorBgMain);
+}
+
+/*
+    Keyboard
+*/
+section#keyboard {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 0;
+}
+.row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+.key {
+    flex: 0 1 auto;
+    margin: 1px;
+    border-radius: 0.5rem;
+    background-color: var(--colorBgMain);    
+    text-align: center;
+    font-weight: bold;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+@media (min-width: 405px) {
+    .key {
+        padding: 0.7rem;
+    }
+}
+@media (min-width: 430px) {
+    .key {
+        padding: 0.85rem;
+    }
+}
+@media (min-width: 510px) {
+    .key {
+        margin: var(--marginBox);
+        padding: 1rem;
+    }
+}
+
+/*
+    Error message: Word does not exist
+*/
+#msgWordNotExists {
+    display: none;
+    position: fixed;
+    top: 6rem;  
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0 auto;
+    width: auto;
+    padding: 0.5rem;
+    border-radius: 0.5rem; 
+    color: var(--colorSecondary);
+    background-color: var(--colorMain);
+}
+
+/*
+    Modal: Correct word message
+*/
+#modalInfo {
+    display: none;
+    position: fixed;
+    top: 6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0 auto;
+    width: auto;
+    padding: 1rem;
+    border: var(--borderBox) solid var(--colorMain);
+    border-radius: 0.5rem;
+    background-color: var(--colorSecondary);
+    font-size: 1.3rem;
+    text-align: center;
+}
+#word {
+    display: none;
+}
+#modalInfo > button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: var(--colorSecondary);
+    background-color: var(--colorBgCorrect);
+    cursor: pointer;
+}
