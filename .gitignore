@@ -1,2 +1,6 @@
 data/OLDwords.json
+node_modules
+.eslintrc.json
+package-lock.json
+package.json
 .gitignore

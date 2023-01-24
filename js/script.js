@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * ARTURO'S WORDLE
@@ -51,7 +51,6 @@ $(async function() {
 
 async function initialise(info, words) {
     info.secretWord = await getWord(words);
-    // console.log('Word: ' + info.secretWord);
 
     $('.word > .letter').text(' ').removeClass('correct').removeClass('existing').removeClass('nonexisting');
     $('.row > .key').removeClass('correct').removeClass('existing').removeClass('nonexisting');
@@ -76,16 +75,16 @@ function processKey(key, words, info) {
             let workingWord = info.secretWord;
             // Only correct letters are checked at first
             for (let index = 0; index < word.length; index++) {
-                letter = word.substr(index, 1);
+                letter = word.substring(index, index + 1);
                 let tableLetter = $(`#word${info.numRow} > div:nth-of-type(${index + 1})`);
                 let keyboardLetter = $(`#${letter}`);
-                if (info.secretWord.substr(index, 1) === letter) {
+                if (info.secretWord.substring(index, index + 1) === letter) {
                     tableLetter.addClass('correct');
                     keyboardLetter.addClass('correct');
                     correctLetters++;
                     // The letter is excluded from future checks
                     correctPositions.push(index);
-                    workingWord = workingWord.substr(0, index) + '=' + workingWord.substr(index + 1);
+                    workingWord = workingWord.substring(0, index) + '=' + workingWord.substring(index + 1);
                 }
             }
             // Once correct letters are sorted out, the rest is checked.
@@ -94,7 +93,7 @@ function processKey(key, words, info) {
             // the second O will not be interpreted as existing)
             for (let index = 0; index < word.length; index++) {                    
                 if (!correctPositions.includes(index)) {
-                    letter = word.substr(index, 1);
+                    letter = word.substring(index, index + 1);
 
                     let tableLetter = $(`#word${info.numRow} > div:nth-of-type(${index + 1})`);
                     let keyboardLetter = $(`#${letter}`);
@@ -104,7 +103,7 @@ function processKey(key, words, info) {
                         if (!keyboardLetter.hasClass('correct')) {
                             keyboardLetter.addClass('existing');
                         }
-                        workingWord = workingWord.substr(0, letterPosition) + '=' + workingWord.substr(letterPosition + 1);
+                        workingWord = workingWord.substring(0, letterPosition) + '=' + workingWord.substring(letterPosition + 1);
                     } else {
                         tableLetter.addClass('nonexisting');
                         keyboardLetter.addClass('nonexisting');

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * Turns a JSON file into an array
